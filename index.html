@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b12">
+<title>Cinemax — Películas y series</title>
+<style>
+:root{color-scheme:dark;--bg:#090b12;--panel:#141925;--muted:#aab2c4;--accent:#e50945}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:2;background:#090b12ed;border-bottom:1px solid #ffffff16;padding:14px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:1.65rem;font-weight:900;letter-spacing:.04em;color:var(--accent)}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:#d9deea;text-decoration:none;font-size:.94rem}
+main{max-width:1200px;margin:auto;padding:28px clamp(16px,4vw,48px) 64px}
+.hero{min-height:270px;border-radius:22px;padding:clamp(24px,5vw,52px);display:flex;align-items:end;background:linear-gradient(90deg,#090b12 5%,#090b12c9 55%,#090b1260),linear-gradient(135deg,#342039,#7a2345 55%,#152c46);overflow:hidden}
+.eyebrow{color:#ff8aa8;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.76rem}
+h1{font-size:clamp(2rem,5vw,3.8rem);line-height:1.05;margin:.4rem 0 1rem}.hero p{max-width:560px;color:#e0e4ee;margin:0 0 18px}
+.note{color:var(--muted);font-size:.9rem;margin:18px 2px 30px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:30px 0 14px}
+h2{font-size:1.35rem;margin:0}.search{width:min(100%,300px);padding:11px 14px;border:1px solid #ffffff2a;border-radius:12px;background:#141925;color:white;font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid #ffffff12;border-radius:15px;overflow:hidden}
+.poster{aspect-ratio:2/2.8;display:grid;place-items:center;padding:18px;text-align:center;background:linear-gradient(145deg,#3a243d,#1c3650);font-size:1.3rem;font-weight:800}
+.card:nth-child(3n+2) .poster{background:linear-gradient(145deg,#4c2633,#25213d)}
+.card:nth-child(3n) .poster{background:linear-gradient(145deg,#24414a,#292440)}
+.info{padding:12px}.info h3{font-size:1rem;margin:0 0 5px}.info p{font-size:.84rem;color:var(--muted);margin:0}
+.tag{display:inline-block;margin-top:9px;color:#ff9ab4;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+footer{border-top:1px solid #ffffff16;padding:22px clamp(16px,4vw,48px);color:var(--muted);text-align:center;font-size:.85rem}
+.empty{display:none;color:var(--muted);padding:18px 0}
+@media(max-width:560px){header{align-items:flex-start;flex-direction:column}nav{gap:12px}.section-head{align-items:flex-start;flex-direction:column}.search{width:100%}.hero{min-height:250px}}
+</style>
+</head>
+<body>
+<header><div class="logo">CINEMAX</div><nav><a href="#inicio">Inicio</a><a href="#series">Series</a><a href="#peliculas">Películas</a></nav></header>
+<main id="inicio">
+<section class="hero"><div><div class="eyebrow">Tu espacio de entretenimiento</div><h1>Historias para cada momento.</h1><p>Explora un catálogo de demostración de películas y series. Consulta siempre las plataformas oficiales para ver cada título de forma legal.</p></div></section>
+<p class="note">Versión inicial de Cinemax. Este catálogo es una demostración y todavía no reproduce películas ni episodios.</p>
+<section id="series">
+<div class="section-head"><h2>Series coreanas</h2><input id="search" class="search" type="search" placeholder="Buscar títulos…" aria-label="Buscar títulos"></div>
+<div class="grid" id="kdrama">
+<article class="card" data-title="Study Group"><div class="poster">STUDY<br>GROUP</div><div class="info"><h3>Study Group</h3><p>Serie coreana · Acción / instituto</p><span class="tag">Coreana</span></div></article>
+<article class="card" data-title="Series coreanas"><div class="poster">DRAMAS<br>COREANOS</div><div class="info"><h3>Más series coreanas</h3><p>Próximamente ampliaremos el catálogo.</p><span class="tag">Colección</span></div></article>
+</div>
+</section>
+<section id="peliculas">
+<div class="section-head"><h2>Películas</h2></div>
+<div class="grid" id="movies">
+<article class="card" data-title="Películas"><div class="poster">CINE<br>PARA TODOS</div><div class="info"><h3>Próximamente</h3><p>Estamos preparando esta sección.</p><span class="tag">Catálogo</span></div></article>
+</div>
+<p class="empty" id="empty">No se han encontrado títulos.</p>
+</section>
+</main>
+<footer>© Cinemax · Catálogo de demostración. Los derechos de cada obra pertenecen a sus titulares.</footer>
+<script>
+const input=document.getElementById('search');
+input.addEventListener('input',()=>{const q=input.value.trim().toLocaleLowerCase('es');let visible=0;document.querySelectorAll('.card').forEach(card=>{const show=card.dataset.title.toLocaleLowerCase('es').includes(q)||card.innerText.toLocaleLowerCase('es').includes(q);card.style.display=show?'':'none';if(show)visible++});document.getElementById('empty').style.display=visible?'none':'block'});
+</script>
+</body>
+</html>
